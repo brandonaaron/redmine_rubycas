@@ -24,15 +24,17 @@ module RedmineRubyCas
   end
 
   def configure!
-    CASClient::Frameworks::Rails::Filter.configure(
-      :cas_base_url => setting("base_url"),
-      :login_url => setting("login_url").blank? ? nil : setting("login_url"),
-      :logout_url => setting("logout_url").blank? ? nil : setting("logout_url"),
-      :validate_url => setting("validate_url").blank? ? nil : setting("validate_url"),
-      :username_session_key => setting("username_session_key"),
-      :extra_attributes_session_key => setting("extra_attributes_session_key"),
-      :logger => Rails.logger
-    )
+    if enabled?
+      CASClient::Frameworks::Rails::Filter.configure(
+        :cas_base_url => setting("base_url"),
+        :login_url => setting("login_url").blank? ? nil : setting("login_url"),
+        :logout_url => setting("logout_url").blank? ? nil : setting("logout_url"),
+        :validate_url => setting("validate_url").blank? ? nil : setting("validate_url"),
+        :username_session_key => setting("username_session_key"),
+        :extra_attributes_session_key => setting("extra_attributes_session_key"),
+        :logger => Rails.logger
+      )
+    end
   end
 
   def extra_attributes_map
