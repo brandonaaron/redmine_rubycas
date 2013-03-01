@@ -52,7 +52,10 @@ module RedmineRubyCas
     map = extra_attributes_map
     if extra_attributes = session[:"#{setting("extra_attributes_session_key")}"]
       extra_attributes.each_pair do |key, val|
-        attrs[map[key]] = val
+        mapped_key = map[key]
+        if mapped_key && User.attribute_method?(mapped_key)
+          attrs[mapped_key] = val
+        end
       end
     end
     attrs
