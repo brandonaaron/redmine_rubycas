@@ -54,7 +54,7 @@ module RedmineRubyCas
       extra_attributes.each_pair do |key, val|
         mapped_key = map[key]
         if mapped_key && User.attribute_method?(mapped_key)
-          attrs[mapped_key] = val
+          attrs[mapped_key] = (val.is_a? Array) ? val.first : val
         end
       end
     end
