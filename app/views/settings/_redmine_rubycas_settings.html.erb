@@ -1,58 +1,69 @@
-<% defaults = Redmine::Plugin::registered_plugins[:redmine_rubycas].settings[:default] %>
+<% @defaults = Redmine::Plugin::registered_plugins[:redmine_rubycas].settings[:default] %>
+<% def get_setting_val(name)
+  val = !@settings[name].nil? ? @settings[name] : @defaults[name.to_sym]
+  val = true if val === "true"
+  val = false if val === "false"
+  val
+end %>
 <fieldset>
     <legend><%= l(:redmine_ruby_cas_plugin_settings) %></legend>
     <p>
         <label for="settings_enabled"><%= l(:enabled) %></label>
-        <%= check_box_tag 'settings[enabled]', "true", @settings['enabled'] || defaults[:enabled] %>
+        <%= hidden_field_tag 'settings[enabled]', "false" %>
+        <%= check_box_tag 'settings[enabled]', "true", get_setting_val('enabled') %>
     </p>
     <p>
         <label for="settings_maintain_standard_login"><%= l(:maintain_standard_login) %></label>
-        <%= check_box_tag 'settings[maintain_standard_login]', "true", @settings['maintain_standard_login'] || defaults[:maintain_standard_login] %>
+        <%= hidden_field_tag 'settings[maintain_standard_login]', "false" %>
+        <%= check_box_tag 'settings[maintain_standard_login]', "true", get_setting_val('maintain_standard_login')  %>
     </p>
     <p>
         <label for="settings_auto_create_users"><%= l(:auto_create_users) %></label>
-        <%= check_box_tag 'settings[auto_create_users]', "true", @settings['auto_create_users'] || defaults[:auto_create_users] %>
+        <%= hidden_field_tag 'settings[auto_create_users]', "false" %>
+        <%= check_box_tag 'settings[auto_create_users]', "true", get_setting_val('auto_create_users') %>
     </p>
     <p>
         <label for="settings_auto_update_users"><%= l(:auto_update_users) %></label>
-        <%= check_box_tag 'settings[auto_update_users]', "true", @settings['auto_update_users'] || defaults[:auto_update_users] %>
+        <%= hidden_field_tag 'settings[auto_update_users]', "false" %>
+        <%= check_box_tag 'settings[auto_update_users]', "true", get_setting_val('auto_update_users') %>
     </p>
     <p>
         <label for="settings_auto_user_attributes_map"><%= l(:auto_user_attributes_map) %></label>
-        <%= text_field_tag 'settings[auto_user_attributes_map]', @settings['auto_user_attributes_map'] || defaults[:auto_user_attributes_map] %>
+        <%= text_field_tag 'settings[auto_user_attributes_map]', get_setting_val('auto_user_attributes_map') %>
     </p>
     <p><%= l(:auto_user_attributes_map_description).html_safe %></p>
     <p><code>firstName=firstName&amp;lastName=lastName&amp;mail=email</code></p>
     <p><%= l(:auto_user_attributes_map_description2).html_safe %></p>
     <p>
         <label for="settings_logout_of_cas_on_logout"><%= l(:logout_of_cas_on_logout) %></label>
-        <%= check_box_tag 'settings[logout_of_cas_on_logout]', "true", @settings['logout_of_cas_on_logout'] || defaults[:logout_of_cas_on_logout] %>
+        <%= hidden_field_tag 'settings[logout_of_cas_on_logout]', "false" %>
+        <%= check_box_tag 'settings[logout_of_cas_on_logout]', "true", get_setting_val('logout_of_cas_on_logout') %>
     </p>
 </fieldset>
 <fieldset>
     <legend><%= l(:rubycas_client_settings) %></legend>
     <p>
         <label for="settings_base_url"><%= l(:base_url) %></label>
-        <%= text_field_tag 'settings[base_url]', @settings['base_url'] || defaults[:base_url] %>
+        <%= text_field_tag 'settings[base_url]', get_setting_val('base_url') %>
     </p>
     <p>
         <label for="settings_login_url"><%= l(:login_url) %></label>
-        <%= text_field_tag 'settings[login_url]', @settings['login_url'] || defaults[:login_url] %>
+        <%= text_field_tag 'settings[login_url]', get_setting_val('login_url') %>
     </p>
     <p>
         <label for="settings_logout_url"><%= l(:logout_url) %></label>
-        <%= text_field_tag 'settings[logout_url]', @settings['logout_url'] || defaults[:logout_url] %>
+        <%= text_field_tag 'settings[logout_url]', get_setting_val('logout_url') %>
     </p>
     <p>
         <label for="settings_validate_url"><%= l(:validate_url) %></label>
-        <%= text_field_tag 'settings[validate_url]', @settings['validate_url'] || defaults[:validate_url] %>
+        <%= text_field_tag 'settings[validate_url]', get_setting_val('validate_url') %>
     </p>
     <p>
         <label for="settings_username_session_key"><%= l(:username_session_key) %></label>
-        <%= text_field_tag 'settings[username_session_key]', @settings['username_session_key'] || defaults[:username_session_key] %>
+        <%= text_field_tag 'settings[username_session_key]', get_setting_val('username_session_key') %>
     </p>
     <p>
         <label for="settings_extra_attributes_session_key"><%= l(:extra_attributes_session_key) %></label>
-        <%= text_field_tag 'settings[extra_attributes_session_key]', @settings['extra_attributes_session_key'] || defaults[:extra_attributes_session_key] %>
+        <%= text_field_tag 'settings[extra_attributes_session_key]', get_setting_val('extra_attributes_session_key') %>
     </p>
 </fieldset>
