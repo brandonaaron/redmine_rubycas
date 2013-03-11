@@ -33,7 +33,10 @@ module AccountControllerPatch
               end
               successful_authentication(user)
             else
-              account_pending
+              render_error(
+                :message => l(:cas_user_not_found, :user => session[:"#{RedmineRubyCas.setting("username_session_key")}"]),
+                :status => 401
+              )
             end
           end
         end
