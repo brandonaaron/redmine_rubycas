@@ -6,7 +6,7 @@ Redmine::Plugin.register :redmine_rubycas do
   name 'Redmine RubyCAS plugin'
   author 'Brandon Aaron'
   description 'This is a plugin for Redmine 2+ that integrates the RubyCAS client.'
-  version '0.0.3'
+  version '0.0.4'
   url 'https://github.com/brandonaaron/redmine_rubycas'
   author_url 'http://brandonaaron.net/'
 
