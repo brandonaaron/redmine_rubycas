@@ -41,7 +41,7 @@ module AccountControllerPatch
     end
 
     def logout_with_cas
-      if RedmineRubyCas.enabled? && RedmineRubyCas.setting("logout_of_cas_on_logout")
+      if RedmineRubyCas.enabled? && RedmineRubyCas.setting("logout_of_cas_on_logout") == "true"
         CASClient::Frameworks::Rails::Filter.logout(self, home_url)
         logout_user
       else
