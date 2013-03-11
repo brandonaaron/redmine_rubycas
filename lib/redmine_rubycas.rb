@@ -10,8 +10,10 @@ module RedmineRubyCas
   end
 
   def settings
-    if self.plugin
-      Setting.plugin_redmine_rubycas || plugin.settings[:default]
+    if ActiveRecord::Base.connection.table_exists?(:settings) && self.plugin && Setting.plugin_redmine_rubycas
+      Setting.plugin_redmine_rubycas
+    else
+      plugin.settings[:default]
     end
   end
 
