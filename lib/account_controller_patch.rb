@@ -21,8 +21,10 @@ module AccountControllerPatch
                 onthefly_creation_failed(user)
               end
             else
-              flash[:error] = l(:cas_user_not_found, :user => session[:"#{RedmineRubyCas.setting("username_session_key")}"])
-              redirect_to home_url
+              render_error(
+                :message => l(:cas_user_not_found, :user => session[:"#{RedmineRubyCas.setting("username_session_key")}"]),
+                :status => 401
+              )
             end
           else
             if user.active?
