@@ -34,11 +34,11 @@ Redmine::Plugin.register :redmine_rubycas do
   })
 end
 
-RedmineRubyCas.configure!
-
 ActionDispatch::Callbacks.to_prepare do
   require_dependency 'account_controller'
   require_dependency 'setting'
   AccountController.send(:include, AccountControllerPatch)
   Setting.send(:include, SettingModelPatch)
+
+  RedmineRubyCas.configure!
 end
